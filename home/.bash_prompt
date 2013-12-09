@@ -1,0 +1,81 @@
+#
+# ~/.bash_prompt
+#
+
+import gitutils/info
+import fancy/fs
+
+###
+# Builds up a bash prompt with git information
+###
+bash_prompt_command_with_git_info() {
+    LAST_EXIT=$?
+
+    WD=$(fancy__pwd)
+
+    local GIT=$(
+        git branch &>/dev/null;
+        if [ $? -eq 0 ]; then
+            echo "git";
+        fi
+    )
+
+    if [[ -n $GIT ]]; then
+        local BRANCH=$(gitutils__branch)
+        local STATUS=$(gitutils__status)
+        local STATUS_COLOR=$(
+            if [[ "$STATUS" == "clean" ]]; then
+                echo "${BGreen}";
+            else
+                echo "${BRed}";
+            fi
+        )
+        # colorize strings
+        if [[ "${BRANCH}" == "master" ]]; then
+            BRANCH="${BRed}${BRANCH}${NONE}" # master branch is bold red
+        else
+            BRANCH="${Yellow}${BRANCH}${NONE}"   # other branches are yellow
+        fi
+        STATUS="${STATUS_COLOR}${STATUS}${NONE}"
+        GIT="${White}${GIT}${NONE}"
+        # place up git info string
+        GIT_INFO="${GIT} ${BRANCH} ${STATUS}"
+        # add wrap up delimiter chars
+        GIT_INFO="${BWhite}[${GIT_INFO}${BWhite}]${NONE}"
+    else
+        unset BRANCH
+        unset STATUS
+        unset STATUS_COLOR
+        unset GIT_INFO
+    fi
+
+    local LAST_STATUS_CODE_SYMBOL=$(
+        if [[ "$LAST_EXIT" == "0" ]]; then
+            echo "${Green}\342\234\223${NoColor}";  # green heck !
+        else
+            echo "${Red}\342\234\227${NoColor}";  # red cross !
+        fi
+    )
+
+    if [[ "$LAST_EXIT" == "0" ]]; then
+        INTRO_COLOR=${Blue}
+    else
+        INTRO_COLOR=${Red}
+    fi
+
+    local PROMPT_SYMBOL=$(
+        echo "${BWhite}\$";
+    )
+
+    # Last formatings
+    LASTCODE="${BWhite}[${LAST_STATUS_CODE_SYMBOL}${BWhite}]${NoColor}"
+    CUR_DIR="${BWhite}[ ${White}${WD} ${BWhite}]${NoColor}"
+    CUR_TIME="${BWhite}[ ${White}\t ${BWhite}]${NoColor}"
+
+PS1="   ${LASTCODE}
+$INTRO_COLOR"
+PS1+="\342\226\210\342\226\210 ${CUR_DIR} ${GIT_INFO} ${CUR_TIME} 
+\342\226\210\342\226\210 ${PROMPT_SYMBOL} ${NoColor}"
+}
+
+PROMPT_COMMAND=bash_prompt_command_with_git_info

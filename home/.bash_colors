@@ -1,0 +1,27 @@
+#
+# ~/.bash_colors
+#
+
+# Reset
+NoColor="\[\033[0m\]"  		# unsets color to term's fg color
+
+# regular colors
+Black="\[\033[0;30m\]"		# black
+Red="\[\033[0;31m\]"    	# red
+Green="\[\033[0;32m\]"    	# green
+Yellow="\[\033[0;33m\]"    	# yellow
+Blue="\[\033[0;34m\]"    	# blue
+Magenta="\[\033[0;35m\]"    	# magenta
+Cyan="\[\033[0;36m\]"    	# cyan
+White="\[\033[0;37m\]"    	# white
+
+# emphasized (bolded) colors
+BBlack="\[\033[1;30m\]"
+BRed="\[\033[1;31m\]"
+BGreen="\[\033[1;32m\]"
+BYellow="\[\033[1;33m\]"
+BBlue="\[\033[1;34m\]"
+BMagenta="\[\033[1;35m\]"
+BCyan="\[\033[1;36m\]"
+BWhite="\[\033[1;37m\]"
+

@@ -1,0 +1,39 @@
+#
+# Fancy file system display
+#
+
+# avoid double inclusion
+if test "${fancy_fs__imported+defined}" == "defined"
+then
+    return 0
+fi
+fancy_fs__imported=1
+
+#####
+# Configuration
+#
+###
+# Constants used in this namespace
+###
+PWD_MAX_LENGHT=25
+TRUNC_SYMBOL='..'
+#####
+
+need data "PWD_MAX_LENGHT"
+need data "TRUNC_SYMBOL"
+
+function fancy__pwd() {
+    local dir=${PWD##*/}
+    local lenght=$(( ( PWD_MAX_LENGHT < ${#dir} ) ? ${#dir} : PWD_MAX_LENGHT))
+    
+    local FANCY_PWD=${PWD/#$HOME/\~}
+    
+    local offset=$(( ${#FANCY_PWD} - lenght ))
+    
+    if [ ${offset} -gt "0" ]; then 
+        FANCY_PWD=${FANCY_PWD:$offset:$lenght}
+        FANCY_PWD=TRUNC_SYMBOL*/}
+    fi
+    
+    echo "$FANCY_PWD"
+}
