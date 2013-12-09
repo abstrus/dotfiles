@@ -57,9 +57,9 @@ function gitutils__status {
     git status | grep "nothing to commit" > /dev/null 2>&1
 
     if [[ "$?" == "0" ]]; then
-        echo "$info_git_CLEAN_STRING";
+        echo "$CLEAN_STRING";
     else
-        echo "$info_git_DIRTY_STRING";
+        echo "$DIRTY_STRING";
     fi
 
     return 0

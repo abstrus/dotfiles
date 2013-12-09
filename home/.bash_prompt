@@ -51,7 +51,7 @@ bash_prompt_command_with_git_info() {
 
     local LAST_STATUS_CODE_SYMBOL=$(
         if [[ "$LAST_EXIT" == "0" ]]; then
-            echo "${Green}\342\234\223${NoColor}";  # green heck !
+            echo "${Green}\342\234\223${NoColor}";  # green check !
         else
             echo "${Red}\342\234\227${NoColor}";  # red cross !
         fi
