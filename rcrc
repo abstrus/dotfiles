@@ -1,0 +1,37 @@
+#
+# ~/.rcrc
+#
+
+# The rcm dotfile manager can be configured using a .rcrc file in your home 
+# directory. This location can be changed by setting the RCRC environment 
+# variable. The format is POSIX shell. It is sourced in by the lsrc(1), 
+# mkrc(1), rcdn(1), and rcup(1) programs.
+#
+# It supports these variables:
+#   COPY_ALWAYS
+#     always copy files that match the listed globs, never symlink them.
+#   DOTFILES_DIRS
+#     the source directories for dotfiles. The first in the list is the source
+#     to which dotfiles created using mkrc(1) are installed. The default value
+#     is ~/.dotfiles
+#   EXCLUDES
+#     a space-separated list of exclude patterns. Exclude patterns are 
+#     explained in detail in lsrc(1) under the section EXCLUDE PATTERN.
+#   HOSTNAME
+#     the hostname for this computer. This is normally computed using the 
+#     hostname(1) command, but this command is non-standard and can prove 
+#     unreliable. The HOSTNAME variable forces a known hostname.
+#   TAGS
+#     the default tags.
+#   SYMLINK_DIRS
+#     a space-separated list of patterns. Directories matching a pattern are 
+#     symlinked instead of descended. Patterns are explained in detail in 
+#     lsrc(1) under the section EXCLUDE PATTERN.
+#   UNDOTTED
+#     a space separated list of patterns. Files matching this pattern will be 
+#     symlinked without a leading dot. If a file is also in SYMLINK_DIRS, then
+#     the directory will be symlinked without a leading dot. Patterns are 
+#     explained in detail in lsrc(1) under the section EXCLUDE PATTERN.
+
+
+TAGS="zsh"
